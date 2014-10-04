@@ -10,6 +10,7 @@ public class Player : MonoBehaviour {
 	public int jumpMult;
 	public int moveMult;
 	public int maxJumpHeight;
+	Animator animator;
 
 	void Air(){
 	}
@@ -28,11 +29,12 @@ public class Player : MonoBehaviour {
 	void Start () {
         isJumping = true;
 		isFalling = true;
+		animator = GetComponent<Animator> ();
 	}
 	
 	void Update () {
-		handleControls ();
 
+		handleControls ();
 		Vector3 v = rigidbody2D.velocity;
 		if (isJumping) {
 			if (isFalling){
@@ -53,12 +55,14 @@ public class Player : MonoBehaviour {
 		if (other.gameObject.name == "Floor"){
 			isJumping = false;
 			isFalling = false;
+			animator.SetBool ("jump",false);
 
 		}
 		if (other.gameObject.name == "Platform") {
 			if (other.collider.GetType() == typeof(UnityEngine.EdgeCollider2D)){
 				isJumping = false;
 				isFalling = false;
+				animator.SetBool ("jump",false);
 			}
 			else{
 				isFalling = true;
@@ -72,12 +76,14 @@ public class Player : MonoBehaviour {
 			    !isJumping){
 				isJumping = true;
 				isFalling = true;
+				animator.SetBool ("jump",true);
 			}
 		}
 	}
 
 	void handleControls(){
 		if (Input.GetButton ("Up") && !isJumping) {
+			animator.SetBool ("jump",true);
 			isJumping = true;
 			oldY = transform.position.y;
 		}
@@ -89,7 +95,20 @@ public class Player : MonoBehaviour {
 		Vector3 v = rigidbody2D.velocity;
 
 		v.x = Input.GetAxis ("Horizontal") * moveMult;
+		print (v.x);	
+		if (v.x > 0f) {
+			animator.SetBool ("run", true);
+			transform.localScale = new Vector3(5,5,1);
+		} else if (v.x < 0f) {
+			animator.SetBool ("run", true);
+			transform.localScale = new Vector3(-5,5,1);
+		} else {
+			animator.SetBool("run",false);
+		}
+
 		rigidbody2D.velocity = v;
+
+
 
 		if (Input.GetButton ("Air")) {
 		}
