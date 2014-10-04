@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 	
-
+	public GameObject floor;
 
 	void Start () {
 	
@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour {
 	
 
 	void Update () {
-	
+		Vector3 temp = floor.transform.position;
+		temp.x += 0.01f;
+		floor.transform.position = temp;
 	}
 }
