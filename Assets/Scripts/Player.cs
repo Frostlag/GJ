@@ -269,8 +269,10 @@ public class Player : MonoBehaviour {
 	}
 
 	void Die(){
-		Destroy (gameObject);
-		GameObject.Find ("GameManager").SendMessage ("GameOver");
+		Vector3 v = GameObject.Find ("Main Camera").transform.position;
+		v.z = 0;
+		transform.position = v;
+
 	}
 
 	void FireProjectile(){

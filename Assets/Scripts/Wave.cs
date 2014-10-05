@@ -15,7 +15,7 @@ public class Wave : MonoBehaviour {
 	void Start () {
 		renderer.enabled = false;
 		this.collider2D.enabled = false;
-		Invoke ("Appear", waitTime);
+		Invoke ("Appear", waitTime	);
 		oldX = transform.position.x;
 		touching = new List<GameObject> ();
 	}
