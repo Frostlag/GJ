@@ -4,6 +4,8 @@ TextureImporter:
   fileIDToRecycleName:
     21300000: Particles Sprite Sheet_0
     21300002: Particles Sprite Sheet_1
+    21300004: Particles Sprite Sheet_2
+    21300006: Particles Sprite Sheet_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -59,6 +61,26 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Particles Sprite Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Particles Sprite Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 64
         y: 64
         width: 32
         height: 32
