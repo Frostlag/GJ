@@ -14,7 +14,7 @@ GameObject:
   - 50: {fileID: 5000000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: Fireball
+  m_Name: Wave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,7 +38,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Mass: 9.99999975e-05
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 0
@@ -54,7 +54,7 @@ CircleCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: 683bbb8fc8ad6334db3dda5259cfc655, type: 2}
+  m_Material: {fileID: 6200000, guid: 15d9e2810bf7f0d4d9717d6473f60fce, type: 2}
   m_IsTrigger: 0
   m_Radius: 9.99999975e-05
   m_Center: {x: 0, y: 0}
@@ -81,10 +81,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4237b79754bf64f4f995be51de827865, type: 3}
+  m_Script: {fileID: 11500000, guid: ac52686931a1f624ead41d31cc2c2c58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  waitTime: .400000006
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -106,7 +106,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 44922f3645e4998459a87ee27e0e4e76, type: 3}
-  m_Color: {r: .91911763, g: .247210965, b: 0, a: 1}
+  m_Color: {r: 0, g: .131034374, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -1,13 +1,18 @@
 fileFormatVersion: 2
-guid: 75cd6621f03f056458fae7f3e238e941
+guid: b8dfd5829406e2b4cb23958b587eeae2
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Terrain Sprite Sheet_0
-    21300002: Terrain Sprite Sheet_1
-    21300004: Terrain Sprite Sheet_2
-    21300006: Terrain Sprite Sheet_3
-    21300008: Terrain Sprite Sheet_4
-    21300010: Terrain Sprite Sheet_5
+    21300000: Ninja Sprite Sheet_0
+    21300002: Ninja Sprite Sheet_1
+    21300004: Ninja Sprite Sheet_2
+    21300006: Ninja Sprite Sheet_3
+    21300008: Ninja Sprite Sheet_4
+    21300010: Ninja Sprite Sheet_5
+    21300012: Ninja Sprite Sheet_6
+    21300014: Ninja Sprite Sheet_7
+    21300016: Ninja Sprite Sheet_8
+    21300018: Ninja Sprite Sheet_9
+    21300020: Ninja Sprite Sheet_10
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -49,7 +54,87 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Terrain Sprite Sheet_0
+    - name: Ninja Sprite Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Ninja Sprite Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Ninja Sprite Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Ninja Sprite Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Ninja Sprite Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Ninja Sprite Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Ninja Sprite Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Ninja Sprite Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Ninja Sprite Sheet_8
       rect:
         serializedVersion: 2
         x: 0
@@ -59,7 +144,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Terrain Sprite Sheet_1
+    - name: Ninja Sprite Sheet_9
       rect:
         serializedVersion: 2
         x: 32
@@ -69,41 +154,11 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Terrain Sprite Sheet_2
+    - name: Ninja Sprite Sheet_10
       rect:
         serializedVersion: 2
         x: 64
         y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Terrain Sprite Sheet_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Terrain Sprite Sheet_4
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Terrain Sprite Sheet_5
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
         width: 32
         height: 32
       alignment: 0

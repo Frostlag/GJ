@@ -8,7 +8,7 @@ public class Fireball : MonoBehaviour {
 	void Start () {
 		Vector3 s = transform.localScale;
 		float side = s.x / Mathf.Abs (s.x);
-
+		
 		Vector3 v;
 		v.x = speed * side;
 		v.y = 0;

@@ -29,6 +29,7 @@ public class Player : MonoBehaviour {
 	public GameObject projectile;
 	public GameObject airEffect;
 	public GameObject column;
+	public GameObject wave;
 
 	void Air(){
 		if (airOnCD)return;
@@ -69,9 +70,8 @@ public class Player : MonoBehaviour {
 		BoxCollider2D box = GetComponent<BoxCollider2D> ();
 		BoxCollider2D otherbox = newColumn.GetComponent<BoxCollider2D> ();	
 		Vector3 newPos = v;
-		newPos.x = v.x + box.size.x*side*8;
-		newPos.y -= otherbox.size.y*2.5f;
-		print (newPos.y);
+		newPos.x = v.x + box.size.x*side*7;
+		newPos.y -= otherbox.size.y*5.3f;
 		newPos.z = 0;
 		newColumn.transform.position = newPos;
 		
@@ -87,31 +87,42 @@ public class Player : MonoBehaviour {
 	}
 
 	void Water(){
+		if (isJumping)return;
+		if (waterOnCD)return;
+		
+		Root (0.6f);
+		
+		Vector3 v = this.transform.position;
+		float side = this.transform.localScale.x / Mathf.Abs(this.transform.localScale.x);
+		GameObject newWave = Instantiate (wave) as GameObject;
+		
+		BoxCollider2D box = GetComponent<BoxCollider2D> ();
+		BoxCollider2D otherbox = newWave.GetComponent<BoxCollider2D> ();	
+		Vector3 newPos = v;
+		newPos.x = v.x + box.size.x*side*4;
+
+
+		newPos.z = 0;
+		newWave.transform.position = newPos;
+		
+		Vector3 s = newWave.transform.localScale;
+		s.x = s.x * side;
+		
+		newWave.transform.localScale = s;
+		
+		waterOnCD = true;
+		animator.SetBool ("watering", true);
+		Invoke ("WaterOffCD", fireCDAmount);
+		Invoke ("doneAbility", 0.1f);
 	}
 
 	void Fire(){
 		if (fireOnCD)return;
-
-		Vector3 v = this.transform.position;
-		float side = this.transform.localScale.x / Mathf.Abs(this.transform.localScale.x);
-		GameObject newProjectile = Instantiate (projectile) as GameObject;
-
-		BoxCollider2D box = GetComponent<BoxCollider2D> ();
-		Vector3 newPos;
-		newPos.x = v.x + box.size.x*side*4;
-		newPos.y = v.y;
-		newPos.z = 0;
-		newProjectile.transform.position = newPos;
-
-		Vector3 s = newProjectile.transform.localScale;
-		s.x = s.x * side;
-		newProjectile.transform.localScale = s;
-				
 		fireOnCD = true;
-		animator.SetBool ("firing", true);
 		Invoke ("FireOffCD", fireCDAmount);
+		Invoke ("FireProjectile", 0.3f);
+		animator.SetBool ("firing", true);
 		Invoke ("doneAbility", 0.01f);
-
 	}
 
 
@@ -151,16 +162,21 @@ public class Player : MonoBehaviour {
 		}
 
 
-			if (other.collider.sharedMaterial.name == "WallTop"){
-				isJumping = false;
-				isFalling = false;
-				animator.SetBool ("jump",false);
-				animator.SetBool ("fall",false);
-			}
-			else if(other.collider.sharedMaterial.name == "WallBottom"){
-				isFalling = true;
-				animator.SetBool ("fall",true);
-			}
+		if (other.collider.sharedMaterial.name == "WallTop"){
+			isJumping = false;
+			isFalling = false;
+			animator.SetBool ("jump",false);
+			animator.SetBool ("fall",false);
+		}
+		else if(other.collider.sharedMaterial.name == "WallBottom"){
+			isFalling = true;
+			animator.SetBool ("fall",true);
+		}
+
+		else if(other.collider.sharedMaterial.name == "spikes" || 
+		        other.collider.sharedMaterial.name == "Enemy" ){
+			Die ();
+		}
 		
 	}
 
@@ -249,5 +265,29 @@ public class Player : MonoBehaviour {
 		animator.SetBool ("firing", false);
 		animator.SetBool ("earthing", false);
 		animator.SetBool ("watering", false);
+	}
+
+	void Die(){
+		Destroy (gameObject);
+		GameObject.Find ("GameManager").SendMessage ("GameOver");
+	}
+
+	void FireProjectile(){
+		Vector3 v = this.transform.position;
+		float side = this.transform.localScale.x / Mathf.Abs(this.transform.localScale.x);
+		GameObject newProjectile = Instantiate (projectile) as GameObject;
+		
+		BoxCollider2D box = GetComponent<BoxCollider2D> ();
+		Vector3 newPos;
+		newPos.x = v.x + box.size.x*side*4;
+		newPos.y = v.y;
+		newPos.z = 0;
+		newProjectile.transform.position = newPos;
+		
+		Vector3 s = newProjectile.transform.localScale;
+		s.x = s.x * side;
+		newProjectile.transform.localScale = s;
+
+
 	}
 }

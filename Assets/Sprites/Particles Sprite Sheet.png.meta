@@ -1,13 +1,9 @@
 fileFormatVersion: 2
-guid: 75cd6621f03f056458fae7f3e238e941
+guid: 7644a339444da6e439a9012f5b63cf90
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Terrain Sprite Sheet_0
-    21300002: Terrain Sprite Sheet_1
-    21300004: Terrain Sprite Sheet_2
-    21300006: Terrain Sprite Sheet_3
-    21300008: Terrain Sprite Sheet_4
-    21300010: Terrain Sprite Sheet_5
+    21300000: Particles Sprite Sheet_0
+    21300002: Particles Sprite Sheet_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -49,61 +45,21 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Terrain Sprite Sheet_0
+    - name: Particles Sprite Sheet_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
+        y: 96
         width: 32
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Terrain Sprite Sheet_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Terrain Sprite Sheet_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Terrain Sprite Sheet_3
+    - name: Particles Sprite Sheet_1
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Terrain Sprite Sheet_4
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Terrain Sprite Sheet_5
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
+        y: 64
         width: 32
         height: 32
       alignment: 0

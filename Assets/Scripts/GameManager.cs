@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour {
 
 	public GameObject mc;
+	public GameObject enemy;
 	public GameObject floor;
 	public GameObject platform;
 	public GameObject[] levelPieces;
@@ -50,4 +51,9 @@ public class GameManager : MonoBehaviour {
 		temp.x += 0.01f;
 		mc.transform.position = temp;
 	}
+
+	void GameOver(){
+
+	}
+	              
 }
