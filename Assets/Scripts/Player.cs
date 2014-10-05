@@ -24,6 +24,7 @@ public class Player : MonoBehaviour {
 	public float maxJumpHeight;
 	public float airDistance;
 
+	public GameObject projectile;
 
 	void Air(){
 		if (airOnCD)return;
@@ -46,6 +47,25 @@ public class Player : MonoBehaviour {
 	}
 
 	void Fire(){
+		if (fireOnCD)return;
+
+		Vector3 v = this.transform.position;
+		float side = this.transform.localScale.x / Mathf.Abs(this.transform.localScale.x);
+		GameObject newProjectile = Instantiate (projectile) as GameObject;
+
+		BoxCollider2D box = GetComponent<BoxCollider2D> ();
+		Vector3 newPos;
+		newPos.x = v.x + box.size.x*side*4;
+		newPos.y = v.y;
+		newPos.z = 0;
+		newProjectile.transform.position = newPos;
+
+		Vector3 s = newProjectile.transform.localScale;
+		s.x = s.x * side;
+		newProjectile.transform.localScale = s;
+				
+		fireOnCD = true;
+		Invoke ("FireOffCD", fireCDAmount);
 	}
 
 
