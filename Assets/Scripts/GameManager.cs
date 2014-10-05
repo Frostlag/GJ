@@ -7,14 +7,15 @@ public class GameManager : MonoBehaviour {
 	public GameObject mc;
 	public GameObject floor;
 	public GameObject platform;
+	public GameObject[] levelPieces;
 
 	public float chanceofplatform;
 
+	float lastPieceX;
+	float xPerPiece = 22;
+
 	void Start () {
-		Vector3 v = mc.transform.position;
-		v.z = 0;
-		GameObject temp = Instantiate (platform,v,Quaternion.identity) as GameObject;
-		temp.tag = "Platform";
+		lastPieceX = mc.transform.position.x-xPerPiece/10*9;
 	}
 	
 
@@ -25,9 +26,19 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void generatePlatform (){
-		float roll = Random.Range (0f, 1f);
-	}
+		Vector3 v = mc.transform.position;
 
+		if (v.x - lastPieceX > xPerPiece){
+			lastPieceX = v.x;
+			int roll = Random.Range (0, levelPieces.Length);
+			v.z = 0;
+			v.y = 0;
+			v.x += xPerPiece;
+			GameObject temp = Instantiate (levelPieces[roll],v,Quaternion.identity) as GameObject;
+
+		}
+	}
+	
 	void moveFloor(){
 		Vector3 temp = floor.transform.position;
 		temp.x += 0.01f;

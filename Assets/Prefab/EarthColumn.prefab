@@ -8,13 +8,12 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 212: {fileID: 21200000}
-  - 58: {fileID: 5800000}
-  - 95: {fileID: 9500000}
   - 50: {fileID: 5000000}
+  - 212: {fileID: 21200000}
+  - 61: {fileID: 6100000}
   - 114: {fileID: 11400000}
-  m_Layer: 0
-  m_Name: Fireball
+  m_Layer: 8
+  m_Name: EarthColumn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,8 +26,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.1017952, y: 1.71194649, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 1.69955051, y: -2.42411995, z: 0}
+  m_LocalScale: {x: -2.13000011, y: 3.1500001, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -42,37 +41,22 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 0
-  m_FixedAngle: 1
-  m_IsKinematic: 0
+  m_FixedAngle: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
---- !u!58 &5800000
-CircleCollider2D:
+--- !u!61 &6100000
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: 683bbb8fc8ad6334db3dda5259cfc655, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Radius: 9.99999975e-05
+  m_Size: {x: 1, y: 1}
   m_Center: {x: 0, y: 0}
---- !u!95 &9500000
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -81,10 +65,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4237b79754bf64f4f995be51de827865, type: 3}
+  m_Script: {fileID: 11500000, guid: a209888bb93ef2a4cbe8b1f4c550c9dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  stilltime: 1
+  movedist: 2
+  movedowntime: 1
+  startime: .5
+  speed: 30
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -103,10 +91,10 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1587559547
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 44922f3645e4998459a87ee27e0e4e76, type: 3}
-  m_Color: {r: .91911763, g: .247210965, b: 0, a: 1}
+  m_Color: {r: .544117689, g: .249847144, b: .00400086911, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
