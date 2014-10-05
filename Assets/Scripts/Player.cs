@@ -7,12 +7,36 @@ public class Player : MonoBehaviour {
     bool isJumping;
 	bool isFalling;
 	float oldY;
-	public int jumpMult;
-	public int moveMult;
-	public int maxJumpHeight;
 	Animator animator;
 
+	bool airOnCD;
+	bool waterOnCD;
+	bool fireOnCD;
+	bool earthOnCD;
+
+	public float airCDAmount;
+	public float fireCDAmount;
+	public float waterCDAmount;
+	public float earthCDAmount;
+
+	public float jumpMult;
+	public float moveMult;
+	public float maxJumpHeight;
+	public float airDistance;
+
+
 	void Air(){
+		if (airOnCD)return;
+		Vector3 v = this.transform.position;
+		float side = this.transform.localScale.x / Mathf.Abs(this.transform.localScale.x);
+
+		v.x += side * airDistance;
+
+		this.transform.position = v;
+
+		airOnCD = true;
+		Invoke ("AirOffCD", airCDAmount);
+
 	}
 
 	void Earth(){
@@ -115,14 +139,26 @@ public class Player : MonoBehaviour {
 
 
 
-		if (Input.GetButton ("Air")) {
-		}
-		if (Input.GetButton ("Earth")) {
-		}
-		if (Input.GetButton ("Water")) {
-		}
-		if (Input.GetButton ("Fire")) {
-		}
+		if (Input.GetButton ("Air")) Air ();
 
+		if (Input.GetButton ("Earth")) Earth ();
+
+		if (Input.GetButton ("Water")) Water();
+
+		if (Input.GetButton ("Fire"))Fire ();
+
+	}
+
+	void AirOffCD(){
+		airOnCD = false;
+	}
+	void WaterOffCD(){
+		waterOnCD = false;
+	}
+	void FireOffCD(){
+		fireOnCD = false;
+	}
+	void EarthOffCD(){
+		earthOnCD = false;
 	}
 }

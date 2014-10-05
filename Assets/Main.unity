@@ -537,9 +537,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e623a05368f304bbf9c796592cfe85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  airCDAmount: 1
+  fireCDAmount: 0
+  waterCDAmount: 0
+  earthCDAmount: 0
   jumpMult: 15
   moveMult: 10
   maxJumpHeight: 6
+  airDistance: 2
 --- !u!95 &1181625770
 Animator:
   serializedVersion: 3
