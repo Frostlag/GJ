@@ -83,7 +83,7 @@ public class Player : MonoBehaviour {
 		earthOnCD = true;
 		animator.SetBool ("earthing", true);
 		Invoke ("EarthOffCD", fireCDAmount);
-		Invoke ("doneAbility", 0.01f);
+		Invoke ("doneAbility", 0.1f);
 	}
 
 	void Water(){
