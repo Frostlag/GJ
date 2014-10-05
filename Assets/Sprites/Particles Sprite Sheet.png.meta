@@ -6,6 +6,11 @@ TextureImporter:
     21300002: Particles Sprite Sheet_1
     21300004: Particles Sprite Sheet_2
     21300006: Particles Sprite Sheet_3
+    21300008: Particles Sprite Sheet_4
+    21300010: Particles Sprite Sheet_5
+    21300012: Particles Sprite Sheet_6
+    21300014: Particles Sprite Sheet_7
+    21300016: Particles Sprite Sheet_8
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -75,13 +80,63 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Particles Sprite Sheet_3
       rect:
         serializedVersion: 2
         x: 64
         y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Particles Sprite Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Particles Sprite Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Particles Sprite Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Particles Sprite Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Particles Sprite Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
         width: 32
         height: 32
       alignment: 0

@@ -5,7 +5,7 @@ public class air : MonoBehaviour {
 	public float lifetime;
 	// Use this for initialization
 	void Start () {
-		Invoke ("Die",lifetime	);
+		Invoke ("Die",lifetime);
 	}
 	
 	// Update is called once per frame

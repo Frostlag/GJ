@@ -84,7 +84,7 @@ MonoBehaviour:
   stilltime: 1
   movedist: 1.5
   movedowntime: 1
-  startime: .5
+  startime: .25
   speed: 30
 --- !u!212 &21200000
 SpriteRenderer:

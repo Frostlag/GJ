@@ -43,7 +43,7 @@ Rigidbody2D:
   m_AngularDrag: .0500000007
   m_GravityScale: 0
   m_FixedAngle: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -67,7 +67,7 @@ Animator:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 694071d915fa27949899a4eaa018c0bf, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -85,6 +85,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitTime: .400000006
+  speed: 3
+  travelDistance: 2
+  explodeForce: 5
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -105,7 +108,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 44922f3645e4998459a87ee27e0e4e76, type: 3}
+  m_Sprite: {fileID: 21300008, guid: 7644a339444da6e439a9012f5b63cf90, type: 3}
   m_Color: {r: 0, g: .131034374, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

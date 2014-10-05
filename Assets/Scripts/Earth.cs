@@ -22,7 +22,7 @@ public class Earth : MonoBehaviour {
 	void Update () {
 		if (transform.position.y - oldY > movedist) {
 			Vector3 v = transform.position;
-			v.y = oldY + movedist;
+			v.y = oldY + movedist;	
 			transform.position = v;
 			Stop ();
 		}

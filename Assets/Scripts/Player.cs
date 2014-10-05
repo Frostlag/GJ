@@ -6,7 +6,7 @@ public class Player : MonoBehaviour {
     
     bool isJumping;
 	bool isFalling;
-	bool root;
+	int root;
 	float oldY;
 	Animator animator;
 
@@ -61,7 +61,7 @@ public class Player : MonoBehaviour {
 		if (isJumping)return;
 		if (earthOnCD)return;
 
-		Root (1f);
+		Root (0.5f);
 		
 		Vector3 v = this.transform.position;
 		float side = this.transform.localScale.x / Mathf.Abs(this.transform.localScale.x);
@@ -71,7 +71,7 @@ public class Player : MonoBehaviour {
 		BoxCollider2D otherbox = newColumn.GetComponent<BoxCollider2D> ();	
 		Vector3 newPos = v;
 		newPos.x = v.x + box.size.x*side*7;
-		newPos.y -= otherbox.size.y*5.3f;
+		newPos.y -= otherbox.size.y*5.5f;
 		newPos.z = 0;
 		newColumn.transform.position = newPos;
 		
@@ -82,7 +82,7 @@ public class Player : MonoBehaviour {
 		
 		earthOnCD = true;
 		animator.SetBool ("earthing", true);
-		Invoke ("EarthOffCD", fireCDAmount);
+		Invoke ("EarthOffCD", earthCDAmount);
 		Invoke ("doneAbility", 0.1f);
 	}
 
@@ -112,15 +112,15 @@ public class Player : MonoBehaviour {
 		
 		waterOnCD = true;
 		animator.SetBool ("watering", true);
-		Invoke ("WaterOffCD", fireCDAmount);
+		Invoke ("WaterOffCD", waterCDAmount);
 		Invoke ("doneAbility", 0.1f);
 	}
 
 	void Fire(){
 		if (fireOnCD)return;
 		fireOnCD = true;
-		Invoke ("FireOffCD", fireCDAmount);
-		Invoke ("FireProjectile", 0.3f);
+		Invoke ("FireOffCD", fireCDAmount);	
+		Invoke ("FireProjectile", 0.2f);
 		animator.SetBool ("firing", true);
 		Invoke ("doneAbility", 0.01f);
 	}
@@ -130,7 +130,7 @@ public class Player : MonoBehaviour {
 	void Start () {
         isJumping = true;
 		isFalling = true;
-		root = false;
+		root = 0;
 		animator = GetComponent<Animator> ();
 	}
 	
@@ -193,7 +193,7 @@ public class Player : MonoBehaviour {
 	}
 
 	void handleControls(){
-		if (Input.GetButton ("Up") && !isJumping && !root) {
+		if (Input.GetButton ("Up") && !isJumping && root==0) {
 			animator.SetBool ("jump",true);
 			isJumping = true;
 			oldY = transform.position.y;
@@ -206,7 +206,7 @@ public class Player : MonoBehaviour {
 		}
 		Vector3 v = rigidbody2D.velocity;
 
-		if (!root)
+		if (root == 0)
 						v.x = Input.GetAxis ("Horizontal") * moveMult;
 				else
 						v.x = 0;
@@ -240,6 +240,7 @@ public class Player : MonoBehaviour {
 		airOnCD = false;
 	}
 	void WaterOffCD(){
+		animator.SetBool ("watering", false);
 		waterOnCD = false;
 	}
 	void FireOffCD(){
@@ -252,12 +253,12 @@ public class Player : MonoBehaviour {
 	}
 
 	void Root(float time){
-		root = true;
+		root += 1;
 		Invoke ("Unroot", time);
 	}
 
 	void Unroot(){
-		root = false;
+		root -= 1;
 	}
 	void doneAbility(){
 
