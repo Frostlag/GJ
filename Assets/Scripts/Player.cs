@@ -51,31 +51,35 @@ public class Player : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D other){
-
 		if (other.gameObject.name == "Floor"){
 			isJumping = false;
 			isFalling = false;
 			animator.SetBool ("jump",false);
+			animator.SetBool ("fall",false);
 
 		}
-		if (other.gameObject.name == "Platform") {
-			if (other.collider.GetType() == typeof(UnityEngine.EdgeCollider2D)){
+
+
+			if (other.collider.sharedMaterial.name == "WallTop"){
 				isJumping = false;
 				isFalling = false;
 				animator.SetBool ("jump",false);
+				animator.SetBool ("fall",false);
 			}
-			else{
+			else if(other.collider.sharedMaterial.name == "WallBottom"){
 				isFalling = true;
+				animator.SetBool ("fall",true);
 			}
-		}
+		
 	}
 
 	void OnCollisionExit2D(Collision2D other){
-		if (other.gameObject.name == "Platform") {
+		if (other.collider.sharedMaterial.name == "WallTop") {
 			if (other.collider.GetType() == typeof(UnityEngine.EdgeCollider2D) &&
 			    !isJumping){
 				isJumping = true;
 				isFalling = true;
+				animator.SetBool ("fall",true);
 				animator.SetBool ("jump",true);
 			}
 		}
@@ -91,11 +95,12 @@ public class Player : MonoBehaviour {
 
 		if (isJumping && !isFalling && (!Input.GetButton("Up")) || transform.position.y - oldY > maxJumpHeight){
 			isFalling = true;
+			animator.SetBool ("fall",true);
 		}
 		Vector3 v = rigidbody2D.velocity;
 
 		v.x = Input.GetAxis ("Horizontal") * moveMult;
-		print (v.x);	
+			
 		if (v.x > 0f) {
 			animator.SetBool ("run", true);
 			transform.localScale = new Vector3(5,5,1);
