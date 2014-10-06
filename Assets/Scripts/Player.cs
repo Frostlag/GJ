@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Player : MonoBehaviour {
-    
+public class Player : MonoBehaviour
+{    
     bool isJumping;
 	bool isFalling;
 	int root;
@@ -31,7 +31,8 @@ public class Player : MonoBehaviour {
 	public GameObject column;
 	public GameObject wave;
 
-	void Air(){
+	void Air()
+	{
 		if (airOnCD)return;
 		Vector3 v = this.transform.position;
 		float side = this.transform.localScale.x / Mathf.Abs(this.transform.localScale.x);
@@ -52,12 +53,10 @@ public class Player : MonoBehaviour {
 
 		Invoke ("AirOffCD", airCDAmount);
 		Invoke ("doneAbility", 0.1f);
-
-
-
 	}
 
-	void Earth(){
+	void Earth()
+	{
 		if (isJumping)return;
 		if (earthOnCD)return;
 
@@ -86,7 +85,8 @@ public class Player : MonoBehaviour {
 		Invoke ("doneAbility", 0.1f);
 	}
 
-	void Water(){
+	void Water()
+	{
 		if (isJumping)return;
 		if (waterOnCD)return;
 		
@@ -100,7 +100,6 @@ public class Player : MonoBehaviour {
 		BoxCollider2D otherbox = newWave.GetComponent<BoxCollider2D> ();	
 		Vector3 newPos = v;
 		newPos.x = v.x + box.size.x*side*4;
-
 
 		newPos.z = 0;
 		newWave.transform.position = newPos;
@@ -116,7 +115,8 @@ public class Player : MonoBehaviour {
 		Invoke ("doneAbility", 0.1f);
 	}
 
-	void Fire(){
+	void Fire()
+	{
 		if (fireOnCD)return;
 		fireOnCD = true;
 		Invoke ("FireOffCD", fireCDAmount);	
@@ -125,18 +125,17 @@ public class Player : MonoBehaviour {
 		Invoke ("doneAbility", 0.01f);
 	}
 
-
-
-	void Start () {
+	void Start ()
+	{
         isJumping = true;
 		isFalling = true;
 		root = 0;
 		animator = GetComponent<Animator> ();
 	}
 	
-	void Update () {
-
-		handleControls ();
+	void Update ()
+	{
+		handleControls();
 		Vector3 v = rigidbody2D.velocity;
 		if (isJumping) {
 			if (isFalling){
@@ -148,21 +147,20 @@ public class Player : MonoBehaviour {
 
 			rigidbody2D.velocity = v;
 		}
-
-
 	}
 
-	void OnCollisionEnter2D(Collision2D other){
-		if (other.gameObject.name == "Floor"){
+	void OnCollisionEnter2D(Collision2D other)
+	{
+		if (other.gameObject.name == "Floor")
+		{
 			isJumping = false;
 			isFalling = false;
-			animator.SetBool ("jump",false);
-			animator.SetBool ("fall",false);
+			animator.SetBool("jump",false);
+			animator.SetBool("fall",false);
 
 		}
-
-
-		if (other.collider.sharedMaterial.name == "WallTop"){
+		if (other.collider.sharedMaterial.name == "WallTop")
+		{
 			isJumping = false;
 			isFalling = false;
 			animator.SetBool ("jump",false);
@@ -172,18 +170,21 @@ public class Player : MonoBehaviour {
 			isFalling = true;
 			animator.SetBool ("fall",true);
 		}
-
 		else if(other.collider.sharedMaterial.name == "spikes" || 
-		        other.collider.sharedMaterial.name == "Enemy" ){
+		        other.collider.sharedMaterial.name == "Enemy" ||
+		        other.collider.sharedMaterial.name == "DeathPit")
+		{
 			Die ();
 		}
 		
 	}
 
-	void OnCollisionExit2D(Collision2D other){
-		if (other.collider.sharedMaterial.name == "WallTop") {
-			if (other.collider.GetType() == typeof(UnityEngine.EdgeCollider2D) &&
-			    !isJumping){
+	void OnCollisionExit2D(Collision2D other)
+	{
+		if (other.collider.sharedMaterial.name == "WallTop")
+		{
+			if (!isJumping && other.collider.GetType() == typeof(UnityEngine.EdgeCollider2D))
+			{
 				isJumping = true;
 				isFalling = true;
 				animator.SetBool ("fall",true);
@@ -192,90 +193,109 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	void handleControls(){
-		if (Input.GetButton ("Up") && !isJumping && root==0) {
+	void handleControls()
+	{
+		if (Input.GetButton ("Up") && !isJumping && root==0)
+		{
 			animator.SetBool ("jump",true);
 			isJumping = true;
 			oldY = transform.position.y;
 		}
 
-
-		if (isJumping && !isFalling && transform.position.y - oldY > minJumpHeight && (!Input.GetButton("Up")) || transform.position.y - oldY > maxJumpHeight){
+		if (isJumping && !isFalling && transform.position.y - oldY > minJumpHeight && (!Input.GetButton("Up")) || transform.position.y - oldY > maxJumpHeight)
+		{
 			isFalling = true;
 			animator.SetBool ("fall",true);
 		}
 		Vector3 v = rigidbody2D.velocity;
 
 		if (root == 0)
-						v.x = Input.GetAxis ("Horizontal") * moveMult;
-				else
-						v.x = 0;
+			v.x = Input.GetAxis ("Horizontal") * moveMult;
+		else
+			v.x = 0;
 			
-		if (v.x > 0f) {
+		if (v.x > 0f)
+		{
 			animator.SetBool ("run", true);
 			transform.localScale = new Vector3(5,5,1);
-		} else if (v.x < 0f) {
+		}
+		else if (v.x < 0f)
+		{
 			animator.SetBool ("run", true);
 			transform.localScale = new Vector3(-5,5,1);
-		} else {
+		}
+		else
+		{
 			animator.SetBool("run",false);
 		}
 
 		rigidbody2D.velocity = v;
 
+		if (Input.GetButton("Air"))
+			Air();
 
+		if (Input.GetButton("Earth"))
+			Earth();
 
-		if (Input.GetButton ("Air")) Air ();
+		if (Input.GetButton("Water"))
+			Water();
 
-		if (Input.GetButton ("Earth")) Earth ();
-
-		if (Input.GetButton ("Water")) Water();
-
-		if (Input.GetButton ("Fire"))Fire ();
+		if (Input.GetButton("Fire"))
+			Fire();
 
 	}
 
-	void AirOffCD(){
-		animator.SetBool ("airing", false);
+	void AirOffCD()
+	{
+		animator.SetBool("airing", false);
 		airOnCD = false;
 	}
-	void WaterOffCD(){
-		animator.SetBool ("watering", false);
+
+	void WaterOffCD()
+	{
+		animator.SetBool("watering", false);
 		waterOnCD = false;
 	}
-	void FireOffCD(){
-		animator.SetBool ("firing", false);
+
+	void FireOffCD()
+	{
+		animator.SetBool("firing", false);
 		fireOnCD = false;
 	}
-	void EarthOffCD(){
-		animator.SetBool ("earthing", false);
+
+	void EarthOffCD()
+	{
+		animator.SetBool("earthing", false);
 		earthOnCD = false;
 	}
 
-	void Root(float time){
+	void Root(float time)
+	{
 		root += 1;
 		Invoke ("Unroot", time);
 	}
 
-	void Unroot(){
+	void Unroot()
+	{
 		root -= 1;
 	}
-	void doneAbility(){
-
+	void doneAbility()
+	{
 		animator.SetBool ("airing", false);
 		animator.SetBool ("firing", false);
 		animator.SetBool ("earthing", false);
 		animator.SetBool ("watering", false);
 	}
 
-	void Die(){
+	void Die()
+	{
 		Vector3 v = GameObject.Find ("Main Camera").transform.position;
 		v.z = 0;
 		transform.position = v;
-
 	}
 
-	void FireProjectile(){
+	void FireProjectile()
+	{
 		Vector3 v = this.transform.position;
 		float side = this.transform.localScale.x / Mathf.Abs(this.transform.localScale.x);
 		GameObject newProjectile = Instantiate (projectile) as GameObject;
@@ -290,7 +310,5 @@ public class Player : MonoBehaviour {
 		Vector3 s = newProjectile.transform.localScale;
 		s.x = s.x * side;
 		newProjectile.transform.localScale = s;
-
-
 	}
 }
