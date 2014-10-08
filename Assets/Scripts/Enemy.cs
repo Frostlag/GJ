@@ -13,7 +13,6 @@ public class Enemy : MonoBehaviour {
 		health = inithealth;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if (!onScreen && GameObject.Find ("RightBound").transform.position.x > transform.position.x) {
 			onScreen = true;
@@ -37,9 +36,7 @@ public class Enemy : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D other){
 		if (other.collider.sharedMaterial == null)
 			return;
-		if (other.collider.sharedMaterial.name == "WallTop" && onScreen) {
-			rigidbody2D.velocity = Vector3.left * speed;
-		}
+
 		if (other.collider.sharedMaterial.name == "StageEndLeft" ||
 		    other.collider.sharedMaterial.name == "DeathPit") {
 			Destroy(gameObject);

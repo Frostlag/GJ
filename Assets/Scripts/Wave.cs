@@ -33,6 +33,7 @@ public class Wave : MonoBehaviour {
 		Vector3 v = this.transform.position;
 		float side = this.transform.localScale.x / Mathf.Abs(this.transform.localScale.x);
 		foreach (GameObject i in touching) {
+			if (i == null) continue;
 			i.rigidbody2D.AddForce(Vector3.right * side * explodeForce);
 		}
 		Invoke ("Die", 1f);
@@ -53,8 +54,8 @@ public class Wave : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D other){
-		if (other.collider.sharedMaterial.name != "Enemy") {
-						Explode ();
+		if (other.collider.sharedMaterial != null && other.collider.sharedMaterial.name != "Enemy") {
+			Explode ();
 		} else {
 			touching.Add (other.gameObject);
 		}

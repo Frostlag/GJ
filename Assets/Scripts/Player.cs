@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {    
-    bool isJumping;
-	bool isFalling;
+    public bool isJumping;
+	public bool isFalling;
 	int root;
 
 	float oldY;
@@ -14,7 +14,6 @@ public class Player : MonoBehaviour
 
 	bool waterOnCD;
 	bool fireOnCD;
-	bool earthOnCD;		
 
 	public float gravity;
 	public float maxFallingVelocity;
@@ -22,8 +21,6 @@ public class Player : MonoBehaviour
 	public float moveMult;
 
 	public float fireCDAmount;
-	public float waterCDAmount;
-	public float earthCDAmount;
 
 	public float minJumpHeight;
 
@@ -32,75 +29,7 @@ public class Player : MonoBehaviour
 	public GameObject wave;
 
 
-	void Earth()
-	{
-		if (isJumping)return;
-		if (earthOnCD)return;
 
-		Root (0.5f);
-		
-		Vector3 v = this.transform.position;
-		float side = this.transform.localScale.x / Mathf.Abs(this.transform.localScale.x);
-		GameObject newColumn = Instantiate (column) as GameObject;
-		
-		BoxCollider2D box = GetComponent<BoxCollider2D> ();
-		BoxCollider2D otherbox = newColumn.GetComponent<BoxCollider2D> ();	
-		Vector3 newPos = v;
-		newPos.x = v.x + box.size.x*side*7;
-		newPos.y -= otherbox.size.y*5.5f;
-		newPos.z = 0;
-		newColumn.transform.position = newPos;
-		
-		Vector3 s = newColumn.transform.localScale;
-		s.x = s.x * side;
-
-		newColumn.transform.localScale = s;
-		
-		earthOnCD = true;
-		animator.SetBool ("earthing", true);
-		Invoke ("EarthOffCD", earthCDAmount);
-		Invoke ("doneAbility", 0.1f);
-	}
-
-	void Water()
-	{
-		if (isJumping)return;
-		if (waterOnCD)return;
-		
-		Root (0.6f);
-		
-		Vector3 v = this.transform.position;
-		float side = this.transform.localScale.x / Mathf.Abs(this.transform.localScale.x);
-		GameObject newWave = Instantiate (wave) as GameObject;
-		
-		BoxCollider2D box = GetComponent<BoxCollider2D> ();
-		BoxCollider2D otherbox = newWave.GetComponent<BoxCollider2D> ();	
-		Vector3 newPos = v;
-		newPos.x = v.x + box.size.x*side*4;
-
-		newPos.z = 0;
-		newWave.transform.position = newPos;
-		
-		Vector3 s = newWave.transform.localScale;
-		s.x = s.x * side;
-		
-		newWave.transform.localScale = s;
-		
-		waterOnCD = true;
-		animator.SetBool ("watering", true);
-		Invoke ("WaterOffCD", waterCDAmount);
-		Invoke ("doneAbility", 0.1f);
-	}
-
-	void Fire()
-	{
-		if (fireOnCD)return;
-		fireOnCD = true;
-		Invoke ("FireOffCD", fireCDAmount);	
-		Invoke ("FireProjectile", 0.2f);
-		animator.SetBool ("firing", true);
-		Invoke ("doneAbility", 0.01f);
-	}
 
 	void Start ()
 	{
@@ -110,6 +39,9 @@ public class Player : MonoBehaviour
 		animator = GetComponent<Animator> ();
 		rigidbody2D.gravityScale = gravity;
 		gameObject.AddComponent (typeof(AirAbility));
+		gameObject.AddComponent (typeof(EarthAbility));
+		gameObject.AddComponent (typeof(WaterAbility));
+		gameObject.AddComponent (typeof(FireAbility));
 
 	}
 	
@@ -223,22 +155,15 @@ public class Player : MonoBehaviour
 		if (Input.GetButton ("Air"))
 			GetComponent<AirAbility>().Cast ();
 
-		if (Input.GetButton("Earth"))
-			Earth();
+		if (Input.GetButton("Earth") && !isJumping)
+			GetComponent<EarthAbility>().Cast ();
 
-		if (Input.GetButton("Water"))
-			Water();
+		if (Input.GetButton("Water") && !isJumping)
+			GetComponent<WaterAbility>().Cast ();
 
 		if (Input.GetButton("Fire"))
-			Fire();
+			GetComponent<FireAbility>().Cast ();
 
-	}
-
-
-	void WaterOffCD()
-	{
-		animator.SetBool("watering", false);
-		waterOnCD = false;
 	}
 
 	void FireOffCD()
@@ -247,11 +172,6 @@ public class Player : MonoBehaviour
 		fireOnCD = false;
 	}
 
-	void EarthOffCD()
-	{
-		animator.SetBool("earthing", false);
-		earthOnCD = false;
-	}
 
 	public void Root(float time)
 	{
@@ -261,7 +181,7 @@ public class Player : MonoBehaviour
 
 	void Unroot()
 	{
-		root -= 1;
+		if (root > 0) root -= 1;
 	}
 	void doneAbility()
 	{
@@ -275,6 +195,8 @@ public class Player : MonoBehaviour
 	{
 		Vector3 v = GameObject.Find ("Main Camera").transform.position;
 		v.z = 0;
+		isJumping = true;
+		isFalling = true;
 		transform.position = v;
 	}
 
