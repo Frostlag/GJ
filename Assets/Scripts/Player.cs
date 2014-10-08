@@ -54,6 +54,9 @@ public class Player : MonoBehaviour
 		GameObject temp = Instantiate (airEffect) as GameObject;
 		temp.transform.position = v;
 
+		Vector3 s = temp.transform.localScale;
+		s.x = s.x * side;
+
 		airOnCD = true;
 		animator.SetBool ("airing", true);
 
