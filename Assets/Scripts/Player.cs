@@ -7,13 +7,17 @@ public class Player : MonoBehaviour
     bool isJumping;
 	bool isFalling;
 	int root;
-	float oldY;
+	
 	Animator animator;
+
 
 	bool airOnCD;
 	bool waterOnCD;
 	bool fireOnCD;
 	bool earthOnCD;		
+
+	public float gravity;
+	public float maxFallingVelocity;
 
 	public float airCDAmount;
 	public float fireCDAmount;
@@ -131,21 +135,28 @@ public class Player : MonoBehaviour
 		isFalling = true;
 		root = 0;
 		animator = GetComponent<Animator> ();
+		rigidbody2D.gravityScale = gravity;
 	}
 	
 	void Update ()
 	{
 		handleControls();
-		Vector3 v = rigidbody2D.velocity;
-		if (isJumping) {
-			if (isFalling){
-				v.y = -jumpMult;
-			}
-			else{
-				v.y = jumpMult;
-			}
 
-			rigidbody2D.velocity = v;
+		if (isJumping) 
+		{
+			if (isFalling)
+			{
+				if (rigidbody2D.velocity.y < -maxFallingVelocity )
+				{
+					Vector3 v = rigidbody2D.velocity;	
+					v.y = -maxFallingVelocity;
+					rigidbody2D.velocity = v;
+				}
+			}
+			if (!isFalling &&  rigidbody2D.velocity.y < 0)
+			{
+				isFalling = true;
+			}
 		}
 	}
 
@@ -195,19 +206,22 @@ public class Player : MonoBehaviour
 
 	void handleControls()
 	{
+		Vector3 v = rigidbody2D.velocity;
+
 		if (Input.GetButton ("Up") && !isJumping && root==0)
 		{
+			rigidbody2D.AddForce(Vector2.up * jumpMult);
+
 			animator.SetBool ("jump",true);
 			isJumping = true;
-			oldY = transform.position.y;
 		}
 
-		if (isJumping && !isFalling && transform.position.y - oldY > minJumpHeight && (!Input.GetButton("Up")) || transform.position.y - oldY > maxJumpHeight)
+		if (isJumping && !isFalling && !Input.GetButton("Up"))
 		{
 			isFalling = true;
+			v.y = 0;
 			animator.SetBool ("fall",true);
 		}
-		Vector3 v = rigidbody2D.velocity;
 
 		if (root == 0)
 			v.x = Input.GetAxis ("Horizontal") * moveMult;
