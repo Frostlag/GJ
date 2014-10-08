@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     bool isJumping;
 	bool isFalling;
 	int root;
+
+	float oldY;
 	
 	Animator animator;
 
@@ -18,15 +20,15 @@ public class Player : MonoBehaviour
 
 	public float gravity;
 	public float maxFallingVelocity;
+	public float jumpMult;
+	public float moveMult;
 
 	public float airCDAmount;
 	public float fireCDAmount;
 	public float waterCDAmount;
 	public float earthCDAmount;
 
-	public float jumpMult;
-	public float moveMult;
-	public float maxJumpHeight;
+	
 	public float minJumpHeight;
 	public float airDistance;
 
@@ -211,12 +213,12 @@ public class Player : MonoBehaviour
 		if (Input.GetButton ("Up") && !isJumping && root==0)
 		{
 			rigidbody2D.AddForce(Vector2.up * jumpMult);
-
 			animator.SetBool ("jump",true);
 			isJumping = true;
+			oldY = transform.position.y;
 		}
 
-		if (isJumping && !isFalling && !Input.GetButton("Up"))
+		if (isJumping && !isFalling && !Input.GetButton("Up") && transform.position.y -oldY > minJumpHeight)
 		{
 			isFalling = true;
 			v.y = 0;
