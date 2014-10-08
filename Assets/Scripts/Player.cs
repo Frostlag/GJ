@@ -12,21 +12,13 @@ public class Player : MonoBehaviour
 	
 	Animator animator;
 
-	bool waterOnCD;
-	bool fireOnCD;
-
 	public float gravity;
 	public float maxFallingVelocity;
 	public float jumpMult;
 	public float moveMult;
 
-	public float fireCDAmount;
 
 	public float minJumpHeight;
-
-	public GameObject projectile;
-	public GameObject column;
-	public GameObject wave;
 
 
 
@@ -166,11 +158,6 @@ public class Player : MonoBehaviour
 
 	}
 
-	void FireOffCD()
-	{
-		animator.SetBool("firing", false);
-		fireOnCD = false;
-	}
 
 
 	public void Root(float time)
@@ -183,13 +170,6 @@ public class Player : MonoBehaviour
 	{
 		if (root > 0) root -= 1;
 	}
-	void doneAbility()
-	{
-		animator.SetBool ("airing", false);
-		animator.SetBool ("firing", false);
-		animator.SetBool ("earthing", false);
-		animator.SetBool ("watering", false);
-	}
 
 	void Die()
 	{
@@ -198,23 +178,5 @@ public class Player : MonoBehaviour
 		isJumping = true;
 		isFalling = true;
 		transform.position = v;
-	}
-
-	void FireProjectile()
-	{
-		Vector3 v = this.transform.position;
-		float side = this.transform.localScale.x / Mathf.Abs(this.transform.localScale.x);
-		GameObject newProjectile = Instantiate (projectile) as GameObject;
-		
-		BoxCollider2D box = GetComponent<BoxCollider2D> ();
-		Vector3 newPos;
-		newPos.x = v.x + box.size.x*side*4;
-		newPos.y = v.y;
-		newPos.z = 0;
-		newProjectile.transform.position = newPos;
-		
-		Vector3 s = newProjectile.transform.localScale;
-		s.x = s.x * side;
-		newProjectile.transform.localScale = s;
 	}
 }
