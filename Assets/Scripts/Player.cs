@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
 		Vector3 s = temp.transform.localScale;
 		s.x = s.x * side;
 
-		temp.transform = s;
+		temp.transform.localScale = s;
 
 		airOnCD = true;
 		animator.SetBool ("airing", true);
