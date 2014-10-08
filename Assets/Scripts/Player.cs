@@ -12,8 +12,6 @@ public class Player : MonoBehaviour
 	
 	Animator animator;
 
-
-	bool airOnCD;
 	bool waterOnCD;
 	bool fireOnCD;
 	bool earthOnCD;		
@@ -23,48 +21,16 @@ public class Player : MonoBehaviour
 	public float jumpMult;
 	public float moveMult;
 
-	public float airCDAmount;
 	public float fireCDAmount;
 	public float waterCDAmount;
 	public float earthCDAmount;
 
-	
 	public float minJumpHeight;
-	public float airDistance;
 
 	public GameObject projectile;
-	public GameObject airEffect;
 	public GameObject column;
 	public GameObject wave;
 
-	void Air()
-	{
-		if (airOnCD)return;
-		Vector3 v = this.transform.position;
-		float side = this.transform.localScale.x / Mathf.Abs(this.transform.localScale.x);
-		BoxCollider2D box = GetComponent<BoxCollider2D> ();
-
-		v.x += side * airDistance;
-		v.y += box.size.y / 2;
-
-		this.transform.position = v;
-
-		v.x -= side * airDistance / 2;
-
-		GameObject temp = Instantiate (airEffect) as GameObject;
-		temp.transform.position = v;
-
-		Vector3 s = temp.transform.localScale;
-		s.x = s.x * side;
-
-		temp.transform.localScale = s;
-
-		airOnCD = true;
-		animator.SetBool ("airing", true);
-
-		Invoke ("AirOffCD", airCDAmount);
-		Invoke ("doneAbility", 0.1f);
-	}
 
 	void Earth()
 	{
@@ -143,6 +109,8 @@ public class Player : MonoBehaviour
 		root = 0;
 		animator = GetComponent<Animator> ();
 		rigidbody2D.gravityScale = gravity;
+		gameObject.AddComponent (typeof(AirAbility));
+
 	}
 	
 	void Update ()
@@ -252,8 +220,8 @@ public class Player : MonoBehaviour
 
 		rigidbody2D.velocity = v;
 
-		if (Input.GetButton("Air"))
-			Air();
+		if (Input.GetButton ("Air"))
+			GetComponent<AirAbility>().Cast ();
 
 		if (Input.GetButton("Earth"))
 			Earth();
@@ -266,11 +234,6 @@ public class Player : MonoBehaviour
 
 	}
 
-	void AirOffCD()
-	{
-		animator.SetBool("airing", false);
-		airOnCD = false;
-	}
 
 	void WaterOffCD()
 	{
@@ -290,7 +253,7 @@ public class Player : MonoBehaviour
 		earthOnCD = false;
 	}
 
-	void Root(float time)
+	public void Root(float time)
 	{
 		root += 1;
 		Invoke ("Unroot", time);

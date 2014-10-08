@@ -35,7 +35,7 @@ public class Wave : MonoBehaviour {
 		foreach (GameObject i in touching) {
 			i.rigidbody2D.AddForce(Vector3.right * side * explodeForce);
 		}
-		Invoke ("Die", 0.5f);
+		Invoke ("Die", 1f);
 	}
 
 	void Die(){

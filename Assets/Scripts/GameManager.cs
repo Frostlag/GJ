@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour {
 		moveFloor ();
 		moveCamera ();
 		generatePlatform ();
+	
 	}
 
 	void generatePlatform (){
