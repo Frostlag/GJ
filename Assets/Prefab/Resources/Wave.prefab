@@ -87,7 +87,7 @@ MonoBehaviour:
   waitTime: .400000006
   speed: 4
   travelDistance: 2
-  explodeForce: 10
+  explodeForce: .100000001
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

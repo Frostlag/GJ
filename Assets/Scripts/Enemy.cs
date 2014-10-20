@@ -19,9 +19,6 @@ public class Enemy : MonoBehaviour {
 		}
 
 		if (onScreen) {
-			if (Mathf.Abs(rigidbody2D.velocity.x) > Mathf.Abs(speed)){
-				rigidbody2D.velocity = Vector3.left * speed;
-			}
 			rigidbody2D.AddForce(Vector3.left * speed);
 		}
 
