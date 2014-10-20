@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 	Animator animator;
 
 	public float gravity;
-	public float maxFallingVelocity;
+	public float maxAirVelocity;
 	public float jumpMult;
 	public float moveMult;
 
@@ -45,16 +45,23 @@ public class Player : MonoBehaviour
 		{
 			if (isFalling)
 			{
-				if (rigidbody2D.velocity.y < -maxFallingVelocity )
+				if (rigidbody2D.velocity.y < -maxAirVelocity )
 				{
 					Vector3 v = rigidbody2D.velocity;	
-					v.y = -maxFallingVelocity;
+					v.y = -maxAirVelocity;
 					rigidbody2D.velocity = v;
 				}
 			}
 			if (!isFalling &&  rigidbody2D.velocity.y < 0)
 			{
 				isFalling = true;
+			}
+
+			if (rigidbody2D.velocity.y > maxAirVelocity)
+			{
+				Vector3 v = rigidbody2D.velocity;	
+				v.y = maxAirVelocity;
+				rigidbody2D.velocity = v;
 			}
 		}
 	}
@@ -81,7 +88,7 @@ public class Player : MonoBehaviour
 			animator.SetBool ("fall",true);
 		}
 		else if(other.collider.sharedMaterial.name == "spikes" || 
-		        other.collider.sharedMaterial.name == "Enemy" ||
+		        //other.collider.sharedMaterial.name == "Enemy" ||
 		        other.collider.sharedMaterial.name == "DeathPit")
 		{
 			Die ();
