@@ -3,13 +3,20 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 	public int inithealth;
+	public float speed;
 	int health;
 	bool onScreen;
+	bool withPlayer;
 
-	public float speed;
+	GameObject player;
+
+	Animator animator;
+
 	void Start () {
 		onScreen = false;
+		withPlayer = false;
 		health = inithealth;
+		animator = GetComponent<Animator>();
 	}
 	
 	void Update () {
@@ -44,8 +51,30 @@ public class Enemy : MonoBehaviour {
 		if (other.collider.sharedMaterial.name == "Fireball") {
 			health--;
 		}
+
+		if (other.collider.sharedMaterial.name == "Player") {
+			withPlayer = true;
+			StartCoroutine(DoneSwing());
+			player = other.gameObject;
+			animator.SetBool("swing",true);
+		}
+
+
 	}
 
 	void OnCollisionExit2D(Collision2D other){
+		if (other.collider.sharedMaterial.name == "Player") {
+			withPlayer = false;
+		}
+	}
+
+	private IEnumerator DoneSwing(){
+		yield return new WaitForSeconds (0.5f);
+
+		if (withPlayer){
+			player.SendMessage("Die");
+
+		}
+		animator.SetBool("swing",false);
 	}
 }

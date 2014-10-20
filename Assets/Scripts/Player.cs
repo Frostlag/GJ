@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
 			animator.SetBool ("fall",true);
 		}
 		else if(other.collider.sharedMaterial.name == "spikes" || 
-		        other.collider.sharedMaterial.name == "Enemy" ||
+		        //other.collider.sharedMaterial.name == "Enemy" ||
 		        other.collider.sharedMaterial.name == "DeathPit")
 		{
 			Die ();
