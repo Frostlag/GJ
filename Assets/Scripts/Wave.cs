@@ -34,7 +34,10 @@ public class Wave : MonoBehaviour {
 		float side = this.transform.localScale.x / Mathf.Abs(this.transform.localScale.x);
 		foreach (GameObject i in touching) {
 			if (i == null) continue;
-			i.rigidbody2D.AddForce(Vector3.right * side * explodeForce);
+			Vector3 l = i.rigidbody2D.velocity;
+			l.x += side * explodeForce;
+			i.rigidbody2D.velocity = l;
+			l = new Vector3();
 		}
 		Invoke ("Die", 1f);
 	}
@@ -58,6 +61,12 @@ public class Wave : MonoBehaviour {
 			Explode ();
 		} else {
 			touching.Add (other.gameObject);
+		}
+	}
+
+	void OnCollisionExit2D(Collision2D other){
+		if (other.collider.sharedMaterial != null && other.collider.sharedMaterial.name != "Enemy") {
+			touching.Remove (other.gameObject);
 		}
 	}
 }

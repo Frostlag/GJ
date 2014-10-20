@@ -5,9 +5,9 @@ public class Enemy : MonoBehaviour {
 	public int inithealth;
 	int health;
 	bool onScreen;
-	bool colliding;
 
 	public float speed;
+
 	void Start () {
 		onScreen = false;
 		health = inithealth;
@@ -16,13 +16,14 @@ public class Enemy : MonoBehaviour {
 	void Update () {
 		if (!onScreen && GameObject.Find ("RightBound").transform.position.x > transform.position.x) {
 			onScreen = true;
-			colliding = false;
 			rigidbody2D.velocity = Vector3.left * speed;
 		}
 
 		if (onScreen) {
 			if (Mathf.Abs(rigidbody2D.velocity.x) > Mathf.Abs(speed)){
-				rigidbody2D.velocity = Vector3.left * speed;
+				Vector3 v = rigidbody2D.velocity;
+				v.x = -speed;
+				rigidbody2D.velocity = v;
 			}
 			rigidbody2D.AddForce(Vector3.left * speed);
 		}
@@ -45,16 +46,9 @@ public class Enemy : MonoBehaviour {
 		if (other.collider.sharedMaterial.name == "EarthTop") {
 			Destroy(gameObject);
 		}
-		if (other.collider.sharedMaterial.name == "EarthFist" || other.collider.sharedMaterial.name == "Wave"){
-			colliding = true;
-		}
 
 		if (other.collider.sharedMaterial.name == "Fireball") {
 			health--;
 		}
-	}
-
-	void OnCollisionExit2D(Collision2D other){
-		colliding = false;
 	}
 }
