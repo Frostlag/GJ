@@ -334,7 +334,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7486c22c35b74b246a9a9d1d97792d8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followed: {fileID: 1181625764}
 --- !u!1 &123721474
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,7 +1022,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e39a22bfb9b20e441a624d1e4ab6cacb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 121133102}
+  mainCamera: {fileID: 121133102}
   enemy: {fileID: 100000, guid: 58106808ab84a9e4abecac8f3444a442, type: 2}
   floor: {fileID: 462500409}
   levelPieces:
@@ -1031,7 +1030,6 @@ MonoBehaviour:
   - {fileID: 100024, guid: 194605bc0b14d7947a51ab4a05e09d4c, type: 2}
   - {fileID: 100000, guid: a5453a8a57f34af4fa2cd4f08a530ef9, type: 2}
   screenSpeed: .0299999993
-  chanceofplatform: .00100000005
 --- !u!4 &683019769
 Transform:
   m_ObjectHideFlags: 0
