@@ -4,10 +4,9 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
-	public GameObject camera;
+	public GameObject mainCamera;
 	public GameObject enemy;
 	public GameObject floor;
-	public GameObject platform;
 	public GameObject[] levelPieces;
 
 	public float screenSpeed = 0.03f;
@@ -16,29 +15,27 @@ public class GameManager : MonoBehaviour {
 	float lastPieceX;
 	float xPerPiece = 22;
 
-	void start()
+	void Start() // Override
 	{
-		lastPieceX = camera.transform.position.x - xPerPiece / 10 * 9;
+		lastPieceX = mainCamera.transform.position.x - xPerPiece / 10 * 9;
 	}
 
-	void update()
+	void Update() // Override
 	{
 		moveScreen();
-		generatePlatform ();
+		generatePlatform();
 	}
 
 	void generatePlatform()
 	{
-		Vector3 v = camera.transform.position;
+		Vector3 v = mainCamera.transform.position;
 
-		if (v.x - lastPieceX > xPerPiece){
+		if (v.x - lastPieceX > xPerPiece)
+		{
 			lastPieceX = v.x;
-			int roll = Random.Range (0, levelPieces.Length);
 			v.z = 0;
 			v.y = 0;
 			v.x += xPerPiece;
-			GameObject temp = Instantiate (levelPieces[roll],v,Quaternion.identity) as GameObject;
-
 		}
 	}
 	
@@ -48,9 +45,9 @@ public class GameManager : MonoBehaviour {
 		floorPosition.x += screenSpeed;
 		floor.transform.position = floorPosition;
 		
-		Vector3 cameraPosition = camera.transform.position;
-		cameraPosition.x += screenSpeed;
-		camera.transform.position = cameraPosition;
+		Vector3 mainCameraPosition = mainCamera.transform.position;
+		mainCameraPosition.x += screenSpeed;
+		mainCamera.transform.position = mainCameraPosition;
 	}
 
 	void gameOver()

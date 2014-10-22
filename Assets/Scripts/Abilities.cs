@@ -99,7 +99,6 @@ public class WaterAbility:Ability{
 		GameObject newWave = Instantiate (wave) as GameObject;
 		
 		BoxCollider2D box = caster.GetComponent<BoxCollider2D> ();
-		BoxCollider2D otherbox = newWave.GetComponent<BoxCollider2D> ();	
 		Vector3 newPos = v;
 		newPos.x = v.x + box.size.x*side*5;
 

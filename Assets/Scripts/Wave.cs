@@ -30,9 +30,9 @@ public class Wave : MonoBehaviour {
 	}
 
 	void Explode(){
-		Vector3 v = this.transform.position;
 		float side = this.transform.localScale.x / Mathf.Abs(this.transform.localScale.x);
-		foreach (GameObject i in touching) {
+		foreach (GameObject i in touching)
+		{
 			if (i == null) continue;
 			Vector3 l = i.rigidbody2D.velocity;
 			l.x += side * explodeForce;
@@ -50,7 +50,6 @@ public class Wave : MonoBehaviour {
 		renderer.enabled = true;
 		this.collider2D.enabled = true;
 
-		Vector3 v = this.transform.position;
 		float side = this.transform.localScale.x / Mathf.Abs(this.transform.localScale.x);
 
 		rigidbody2D.velocity = Vector3.right * side * speed;
