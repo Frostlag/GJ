@@ -12,13 +12,15 @@ public class Enemy : MonoBehaviour {
 
 	Animator animator;
 
+	// Override
 	void Start () {
 		onScreen = false;
 		withPlayer = false;
 		health = inithealth;
 		animator = GetComponent<Animator>();
 	}
-	
+
+	// Override
 	void Update () {
 		if (!onScreen && GameObject.Find ("RightBound").transform.position.x > transform.position.x) {
 			onScreen = true;
@@ -30,11 +32,11 @@ public class Enemy : MonoBehaviour {
 		}
 
 		if (health == 0) {
-			print ("Killed");
 			Destroy(gameObject);
 		}
 	}
 
+	// Override
 	void OnCollisionEnter2D(Collision2D other){
 		if (other.collider.sharedMaterial == null)
 			return;
@@ -54,7 +56,7 @@ public class Enemy : MonoBehaviour {
 
 		if (other.collider.sharedMaterial.name == "Player") {
 			withPlayer = true;
-			StartCoroutine(DoneSwing());
+			StartCoroutine(doneSwing());
 			player = other.gameObject;
 			animator.SetBool("swing",true);
 		}
@@ -62,17 +64,18 @@ public class Enemy : MonoBehaviour {
 
 	}
 
+	// Override
 	void OnCollisionExit2D(Collision2D other){
 		if (other.collider.sharedMaterial.name == "Player") {
 			withPlayer = false;
 		}
 	}
 
-	private IEnumerator DoneSwing(){
+	private IEnumerator doneSwing(){
 		yield return new WaitForSeconds (0.5f);
 
 		if (withPlayer){
-			player.SendMessage("Die");
+			player.SendMessage("die");
 
 		}
 		animator.SetBool("swing",false);

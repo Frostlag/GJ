@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
 
 
 
-
+	//Override
 	void Start ()
 	{
         isJumping = true;
@@ -36,7 +36,8 @@ public class Player : MonoBehaviour
 		gameObject.AddComponent (typeof(FireAbility));
 
 	}
-	
+
+	//Override
 	void Update ()
 	{
 		handleControls();
@@ -66,6 +67,7 @@ public class Player : MonoBehaviour
 		}
 	}
 
+	//Override
 	void OnCollisionEnter2D(Collision2D other)
 	{
 		if (other.gameObject.name == "Floor")
@@ -91,11 +93,12 @@ public class Player : MonoBehaviour
 		        //other.collider.sharedMaterial.name == "Enemy" ||
 		        other.collider.sharedMaterial.name == "DeathPit")
 		{
-			Die ();
+			die ();
 		}
 		
 	}
 
+	//Override
 	void OnCollisionExit2D(Collision2D other)
 	{
 		if (other.collider.sharedMaterial.name == "WallTop")
@@ -152,33 +155,32 @@ public class Player : MonoBehaviour
 		rigidbody2D.velocity = v;
 
 		if (Input.GetButton ("Air"))
-			GetComponent<AirAbility>().Cast ();
+			GetComponent<AirAbility>().cast ();
 
 		if (Input.GetButton("Earth") && !isJumping)
-			GetComponent<EarthAbility>().Cast ();
+			GetComponent<EarthAbility>().cast ();
 
 		if (Input.GetButton("Water") && !isJumping)
-			GetComponent<WaterAbility>().Cast ();
+			GetComponent<WaterAbility>().cast ();
 
 		if (Input.GetButton("Fire"))
-			GetComponent<FireAbility>().Cast ();
+			GetComponent<FireAbility>().cast ();
 
 	}
 
-
-
-	public void Root(float time)
+	
+	public void rootMove(float time)
 	{
 		root += 1;
-		Invoke ("Unroot", time);
+		Invoke ("unroot", time);
 	}
 
-	void Unroot()
+	void unroot()
 	{
 		if (root > 0) root -= 1;
 	}
 
-	void Die()
+	void die()
 	{
 		Vector3 v = GameObject.Find ("Main Camera").transform.position;
 		v.z = 0;

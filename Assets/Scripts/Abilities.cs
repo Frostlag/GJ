@@ -4,7 +4,7 @@ using System;
 
 public abstract class Ability:MonoBehaviour
 {
-	public abstract void Cast();
+	public abstract void cast();
 
 	public float cooldownAmount;
 	
@@ -14,26 +14,26 @@ public abstract class Ability:MonoBehaviour
 	protected string animationname;
 
 
-	protected IEnumerator OffCooldown(){
+	protected IEnumerator offCooldown(){
 		yield return new WaitForSeconds (cooldownAmount);
 
 		onCD = false;
 	}
 
-	protected bool CanCast(){
+	protected bool canCast(){
 		return !onCD;
 	}
 
-	protected IEnumerator Animate(){
+	protected IEnumerator animate(){
 		animator.SetBool(animationname,true);
 		yield return new WaitForSeconds (0.1f);
 		animator.SetBool(animationname,false);
 	}
 
-	protected void DoneCasting(){
+	protected void doneCasting(){
 		onCD = true;
-		StartCoroutine(OffCooldown());	
-		StartCoroutine(Animate());	
+		StartCoroutine(offCooldown());	
+		StartCoroutine(animate());	
 	}
 
 }
@@ -46,16 +46,17 @@ public class AirAbility:Ability
 	public float airDistance = 4;
 	public float airCooldownAmount = 1;
 
-	public void Start(){
+	//Override
+	public void Start(){ 
 		cooldownAmount = airCooldownAmount;
 		caster = gameObject;
 		animator = caster.GetComponent<Animator>();
 		animationname = "airing";
 	}
 
-	public override void Cast()
+	public override void cast()
 	{
-		if (!CanCast()) return;
+		if (!canCast()) return;
 		
 		Vector3 v = caster.transform.position;
 		float side = caster.transform.localScale.x / Mathf.Abs(caster.transform.localScale.x);
@@ -70,7 +71,7 @@ public class AirAbility:Ability
 		s.x = s.x * side;
 		temp.transform.localScale = s;
 		
-		DoneCasting();
+		doneCasting();
 	}
 
 }
@@ -81,6 +82,7 @@ public class WaterAbility:Ability{
 
 	public float waterCooldownAmount = 1;
 
+	//Override
 	public void Start(){
 		cooldownAmount = waterCooldownAmount;
 		caster = gameObject;
@@ -88,11 +90,12 @@ public class WaterAbility:Ability{
 		animationname = "watering";
 	}
 
-	public override void Cast()
+	//Override
+	public override void cast()
 	{
-		if (!CanCast())return;
+		if (!canCast())return;
 
-		caster.SendMessage("Root",0.6f);
+		caster.SendMessage("rootMove",0.6f);
 		
 		Vector3 v = caster.transform.position;
 		float side = caster.transform.localScale.x / Mathf.Abs(caster.transform.localScale.x);
@@ -112,7 +115,7 @@ public class WaterAbility:Ability{
 		
 		onCD = true;
 		
-		DoneCasting();
+		doneCasting();
 	}
 
 }
@@ -122,6 +125,7 @@ public class EarthAbility:Ability{
 
 	public float earthCooldownAmount = 1.5f;
 
+	//Override
 	public void Start(){
 		cooldownAmount = earthCooldownAmount;
 		caster = gameObject;
@@ -129,10 +133,10 @@ public class EarthAbility:Ability{
 		animationname = "earthing";
 	}
 
-	public override void Cast()
+	public override void cast()
 	{
-		if (!CanCast()) return;
-		caster.SendMessage("Root",0.5f);
+		if (!canCast()) return;
+		caster.SendMessage("rootMove",0.5f);
 		
 		Vector3 v = caster.transform.position;
 		float side = caster.transform.localScale.x / Mathf.Abs(caster.transform.localScale.x);
@@ -151,7 +155,7 @@ public class EarthAbility:Ability{
 
 		newColumn.transform.localScale = s;
 		
-		DoneCasting();
+		doneCasting();
 	}
 	
 }
@@ -161,6 +165,7 @@ public class FireAbility:Ability{
 
 	public float fireCooldownAmount = 0.45f;
 
+	//Override
 	public void Start(){
 		cooldownAmount = fireCooldownAmount;
 		caster = gameObject;
@@ -168,16 +173,17 @@ public class FireAbility:Ability{
 		animationname = "firing";
 	}
 
-	public override void Cast()
+	public override void cast()
 	{
-		if (!CanCast()) return;
+		if (!canCast()) return;
 
-		Invoke("Fire",0.28f);
+		Invoke("fire",0.28f);
 
-		DoneCasting();
+		doneCasting();
 	}
 
-	private void Fire(){
+	//Override
+	private void fire(){
 
 		Vector3 v = caster.transform.position;
 		float side = caster.transform.localScale.x / Mathf.Abs(caster.transform.localScale.x);

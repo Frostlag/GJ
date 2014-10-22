@@ -6,9 +6,10 @@ public class air : MonoBehaviour {
 	public float speed;
 
 	Vector3 v;
-	// Use this for initialization
+
+	//Override
 	void Start () {
-		Invoke ("Die",lifetime);
+		Invoke ("die",lifetime);
 		Vector3 s = transform.localScale;
 		float side = s.x / Mathf.Abs (s.x);
 		v.x = speed * side;
@@ -16,12 +17,12 @@ public class air : MonoBehaviour {
 		v.z = 0;
 	}
 	
-	// Update is called once per frame
+	//Override
 	void Update () {
 		this.transform.position += v;
 	}
 
-	void Die(){
+	void die(){
 		Destroy (gameObject);
 	}
 }

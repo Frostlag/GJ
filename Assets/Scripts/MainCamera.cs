@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Camera : MonoBehaviour {
+public class MainCamera : MonoBehaviour {
 
+	// Override
 	void Start () {
 	
 	}
 	
-	// Update is called once per frame
+	// Override
 	void Update () {
 
 	}

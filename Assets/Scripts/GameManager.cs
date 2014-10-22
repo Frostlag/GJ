@@ -14,12 +14,13 @@ public class GameManager : MonoBehaviour {
 	float lastPieceX;
 	float xPerPiece = 22;
 
-	void Start() // Override
+	// Override
+	void Start() 
 	{
 		lastPieceX = mainCamera.transform.position.x - xPerPiece / 10 * 9;
 	}
-
-	void Update() // Override
+	// Override
+	void Update()
 	{
 		moveScreen();
 		generatePlatform();

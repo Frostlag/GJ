@@ -11,37 +11,38 @@ public class Earth : MonoBehaviour {
 	public float startime;
 	public float speed;
 
+	// Override
 	void Start () {
 
 		oldY = transform.position.y;
-		Invoke ("StartAnimating", startime);
+		Invoke ("startAnimating", startime);
 
 	}
 	
-	// Update is called once per frame
+	// Override
 	void Update () {
 		if (transform.position.y - oldY > movedist) {
 			Vector3 v = transform.position;
 			v.y = oldY + movedist;	
 			transform.position = v;
-			Stop ();
+			stop ();
 		}
 		else if (transform.position.y < oldY) {
 			Destroy(gameObject);
 		}
 	}
 
-	void StartAnimating(){
+	void startAnimating(){
 		this.rigidbody2D.velocity = new Vector3 (0, speed);
 	}
 
 
-	void Stop(){
+	void stop(){
 		rigidbody2D.velocity = Vector3.zero;
-		Invoke ("Down",stilltime);
+		Invoke ("down",stilltime);
 	}
 
-	void Down(){
+	void down(){
 		rigidbody2D.velocity = new Vector3 (0, -speed / 20);
 	}
 	

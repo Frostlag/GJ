@@ -4,7 +4,8 @@ using System.Collections;
 public class Fireball : MonoBehaviour {
 
 	public float speed;
-	// Use this for initialization
+
+	//Override
 	void Start () {
 		Vector3 s = transform.localScale;
 		float side = s.x / Mathf.Abs (s.x);
@@ -16,11 +17,12 @@ public class Fireball : MonoBehaviour {
 		rigidbody2D.velocity = v;
 	}
 	
-	// Update is called once per frame
+	//Override
 	void Update () {
 	
 	}
 
+	//Override
 	void OnCollisionEnter2D(Collision2D other){
 			Destroy(gameObject);
 	}
