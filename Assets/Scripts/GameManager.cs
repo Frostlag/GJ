@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour {
 	void generatePlatform()
 	{
 		Vector3 v = mainCamera.transform.position;
-		print (v.x - lastPieceX );
 		if (v.x - lastPieceX > xPerPiece)
 		{
 			lastPieceX = v.x;
