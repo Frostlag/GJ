@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour {
 	public GameObject[] levelPieces;
 
 	public float screenSpeed = 0.03f;
-	public float chanceofplatform;
 
 	float lastPieceX;
 	float xPerPiece = 22;
