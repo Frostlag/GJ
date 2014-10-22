@@ -2,7 +2,7 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\air.cs">
     <Files>
-      <File FileName="Assets\Scripts\air.cs" Line="3" Column="1" />
+      <File FileName="Assets\Scripts\air.cs" Line="21" Column="32" />
       <File FileName="Assets\Scripts\GameManager.cs" Line="35" Column="52" />
       <File FileName="Assets\Scripts\Abilities.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Player.cs" Line="190" Column="6" />
