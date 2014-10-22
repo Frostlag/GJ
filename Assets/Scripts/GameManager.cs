@@ -4,31 +4,30 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
-	public GameObject mc;
+	public GameObject camera;
 	public GameObject enemy;
 	public GameObject floor;
-	public GameObject platform;
 	public GameObject[] levelPieces;
 
-	public float chanceofplatform;
+	public float screenSpeed = 0.03f;
 
 	float lastPieceX;
 	float xPerPiece = 22;
 
-	void Start () {
-		lastPieceX = mc.transform.position.x-xPerPiece/10*9;
+	void start()
+	{
+		lastPieceX = camera.transform.position.x - xPerPiece / 10 * 9;
 	}
-	
 
-	void Update () {
-		moveFloor ();
-		moveCamera ();
+	void update()
+	{
+		moveScreen();
 		generatePlatform ();
-	
 	}
 
-	void generatePlatform (){
-		Vector3 v = mc.transform.position;
+	void generatePlatform()
+	{
+		Vector3 v = camera.transform.position;
 
 		if (v.x - lastPieceX > xPerPiece){
 			lastPieceX = v.x;
@@ -41,19 +40,19 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 	
-	void moveFloor(){
-		Vector3 temp = floor.transform.position;
-		temp.x += 0.01f;
-		floor.transform.position = temp;
+	void moveScreen()
+	{
+		Vector3 floorPosition = floor.transform.position;
+		floorPosition.x += screenSpeed;
+		floor.transform.position = floorPosition;
+		
+		Vector3 cameraPosition = camera.transform.position;
+		cameraPosition.x += screenSpeed;
+		camera.transform.position = cameraPosition;
 	}
 
-	void moveCamera(){
-		Vector3 temp = mc.transform.position;
-		temp.x += 0.01f;
-		mc.transform.position = temp;
-	}
-
-	void GameOver(){
+	void gameOver()
+	{
 	
 	}
 	              

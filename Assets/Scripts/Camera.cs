@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Camera : MonoBehaviour {
 
-	public GameObject followed;
 	void Start () {
 	
 	}
