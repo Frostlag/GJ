@@ -14,10 +14,13 @@ public class GameManager : MonoBehaviour {
 	float lastPieceX;
 	float xPerPiece = 22;
 
+	List<GameObject> onStagePieces;
+
 	// Override
 	void Start() 
 	{
 		lastPieceX = mainCamera.transform.position.x - xPerPiece / 10 * 9;
+		onStagePieces = new List<GameObject> ();
 	}
 	// Override
 	void Update()
@@ -36,7 +39,8 @@ public class GameManager : MonoBehaviour {
 			v.z = 0;
 			v.y = 0;
 			v.x += xPerPiece;
-			GameObject temp = Instantiate (levelPieces[roll],v,Quaternion.identity) as GameObject;
+
+			onStagePieces.Add(Instantiate (levelPieces[roll],v,Quaternion.identity) as GameObject);
 		}
 	}
 	
