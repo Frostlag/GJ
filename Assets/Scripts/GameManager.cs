@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour {
 	public GameObject mc;
 	public GameObject enemy;
 	public GameObject floor;
-	public GameObject platform;
 	public GameObject[] levelPieces;
 
 	public float chanceofplatform;
