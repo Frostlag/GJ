@@ -1023,7 +1023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e39a22bfb9b20e441a624d1e4ab6cacb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 0}
+  camera: {fileID: 121133102}
   enemy: {fileID: 100000, guid: 58106808ab84a9e4abecac8f3444a442, type: 2}
   floor: {fileID: 462500409}
   levelPieces:
